@@ -147,7 +147,7 @@ const fetchProducts = async () => {
             
             <div className="flex-1">
             <Products
-         
+         loading={loading}
             resetFilters={resetFilters}
          filteredProducts={currentProducts}
          setQuickViewProduct={setQuickViewProduct}
