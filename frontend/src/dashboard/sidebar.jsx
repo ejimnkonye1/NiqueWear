@@ -2,13 +2,18 @@ import { BiPurchaseTagAlt } from "react-icons/bi"
 import {  FiLogOut,  FiSettings, FiShoppingBag, FiUser } from "react-icons/fi"
 import { useSelector } from "react-redux";
 import capitalizeFirstLetter from "../util/cap";
+import LogoutModal from "./logoutmodal";
+import { useState } from "react";
 
 
 const UserSidebar = ({setActiveTab,orders, activeTab}) => {
       const user = useSelector((state) => state.user);
       const firstLetter = user?.email ? user.email.charAt(0).toUpperCase() : '';
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
     return(
+      <>
+
         <div>
                  <aside className="lg:w-64 flex-shrink-0">
                         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -70,7 +75,9 @@ const UserSidebar = ({setActiveTab,orders, activeTab}) => {
                                 </button>
                               </li>
                               <li>
-                                <button className="w-full flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+                                <button 
+                                    onClick={() => setIsLogoutModalOpen(true)}
+                                className="w-full flex items-center px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
                                   <FiLogOut className="mr-3" />
                                   Sign Out
                                 </button>
@@ -80,20 +87,16 @@ const UserSidebar = ({setActiveTab,orders, activeTab}) => {
                         </div>
             
                         {/* Sustainability Badge */}
-                        <div className="mt-6 bg-white rounded-lg shadow-sm p-6">
-                          <div className="flex items-center">
-                            <BiPurchaseTagAlt className="flex-shrink-0 h-6 w-6 text-green-500 mr-3" />
-                            <div>
-                              <h3 className="text-sm font-medium text-gray-900">Your Sustainable Impact</h3>
-                              <p className="text-xs text-gray-500 mt-1">
-                                You've saved 3.2kg CO₂ with your orders
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+                   
                       </aside>
             
         </div>
+              <LogoutModal
+                isOpen={isLogoutModalOpen}
+                onClose={() => setIsLogoutModalOpen(false)}
+               
+            />
+                  </>
     )
 }
 export default UserSidebar

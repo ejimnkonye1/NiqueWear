@@ -79,8 +79,8 @@ function App() {
         )}
                 {  location.pathname !== '/cart' &&
                 !location.pathname.startsWith('/product/') &&   location.pathname !== '/checkout' 
-                  && location.pathname !== '/userdashboard'  && location.pathname !== '/checkout' 
-              &&  (
+                  && location.pathname !== '/userdashboard'  && location.pathname !== '/login' 
+              &&  location.pathname !== '/register' &&   (
                 <>
                              <Search 
           searchQuery={searchQuery}

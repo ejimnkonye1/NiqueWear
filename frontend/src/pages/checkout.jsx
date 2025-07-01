@@ -34,16 +34,16 @@ const CheckoutPage = () => {
   const { cart, clearCart } = useCart();
   const navigate = useNavigate();
  const [createdOrder, setCreatedOrder] = useState(null); // Add this line
-
+ 
   // Calculate order totals
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shipping = 1000; 
-  const total = subtotal + shipping ;
+  const total =  Math.round(subtotal + shipping) ;
 const paystackKey = import.meta.env.VITE_PAYSTACK_KEY;
   // Paystack config with useMemo to prevent unnecessary re-renders
   const paystackConfig = useMemo(() => ({
     reference: (new Date()).getTime().toString(),
-    email: formData.email ,
+    email: user?.email ,
     amount: total * 100, // Paystack uses kobo
     publicKey:  paystackKey,
     currency: 'NGN',
@@ -99,7 +99,7 @@ const paystackKey = import.meta.env.VITE_PAYSTACK_KEY;
       const orderData = {
         ...formData,
           userId: user._id,         // Keep user ID for reference
-         userEmail: user.email ,
+         userEmail:  user.email ,
 
         items: cart.map(item => ({
           productId: item._id,
@@ -117,11 +117,17 @@ const paystackKey = import.meta.env.VITE_PAYSTACK_KEY;
 
       console.log('Submitting order to backend:', orderData);
       
-      // Submit order to backend
-      const response = await apiClient.request(`${import.meta.env.VITE_SERVER_URL}/api/orders`, orderData);
-      console.log('Order created:', response.data);
-          const order = response.data;
-      setCreatedOrder(order);
+const response = await apiClient.request(`${import.meta.env.VITE_SERVER_URL}/api/orders`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json", // Required for JSON data
+  },
+  body: JSON.stringify(orderData), // Convert object to JSON string
+});
+ const order = await response.json(); // Add this line
+console.log("Parsed order data:", order);
+
+setCreatedOrder(order);
       // Clear cart and show success
       clearCart();
       setOrderPlaced(true);
