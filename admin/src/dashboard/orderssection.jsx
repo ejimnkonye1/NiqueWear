@@ -7,7 +7,7 @@ const OrdersSection = () => {
     const [loading, setLoading] = useState(false)
     const [orders, setOrders] = useState([])
      const [error, setError] = useState(null)
-
+console.log(orders,'l')
    useEffect(() => {
   const getproduct = async () => {
     setLoading(true);
@@ -58,9 +58,15 @@ const OrdersSection = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {orders.map((order) => (
               <tr key={order.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ORD-{order.paymentReference}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">ORD-{order._id.slice(-6)}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.lastName}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-01-15</td>
+<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+  {order?.createdAt ? new Date(order.createdAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  }) : '---'}
+</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                     order.status === 'paid' ? 'bg-green-100 text-green-800' :

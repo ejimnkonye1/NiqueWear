@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+
+  @layer base {
+    @font-face {
+      font-family: 'SpaceGrotesk';
+      src: url('/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+}
+
+  .font-grotesk {
+ font-family:  "SpaceGrotesk";
+  }
+body{
+     font-family:  "SpaceGrotesk";
+}
+  .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}

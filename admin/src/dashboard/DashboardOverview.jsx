@@ -60,7 +60,9 @@ useEffect(() => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-500">Total Revenue</p>
-              <p className="text-2xl font-bold">{formatAsNaira(totalrevenue)}</p>
+<p className="text-2xl font-bold">
+  {formatAsNaira(Math.round(totalrevenue))}
+</p>
             </div>
             <div className="p-3 rounded-full bg-indigo-100 text-indigo-600">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,7 +112,7 @@ useEffect(() => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
         <div className="bg-white p-6 rounded-lg shadow">
           <h3 className="text-lg font-medium mb-4">Recent Orders</h3>
           <div className="overflow-x-auto">
@@ -152,47 +154,7 @@ useEffect(() => {
             </table>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-medium mb-4">Top Selling Products</h3>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="flex-shrink-0 h-10 w-10 rounded-md bg-indigo-100 flex items-center justify-center">
-                <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <h4 className="text-sm font-medium text-gray-900">Wireless Earbuds</h4>
-                <p className="text-sm text-gray-500">45 sold this week</p>
-              </div>
-              <div className="ml-auto text-sm font-medium text-gray-900">$79.99</div>
-            </div>
-            <div className="flex items-center">
-              <div className="flex-shrink-0 h-10 w-10 rounded-md bg-green-100 flex items-center justify-center">
-                <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <h4 className="text-sm font-medium text-gray-900">Organic Cotton T-Shirt</h4>
-                <p className="text-sm text-gray-500">32 sold this week</p>
-              </div>
-              <div className="ml-auto text-sm font-medium text-gray-900">$24.99</div>
-            </div>
-            <div className="flex items-center">
-              <div className="flex-shrink-0 h-10 w-10 rounded-md bg-purple-100 flex items-center justify-center">
-                <svg className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-              </div>
-              <div className="ml-4">
-                <h4 className="text-sm font-medium text-gray-900">Smart Watch</h4>
-                <p className="text-sm text-gray-500">28 sold this week</p>
-              </div>
-              <div className="ml-auto text-sm font-medium text-gray-900">$199.99</div>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </div>
   );
