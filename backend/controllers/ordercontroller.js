@@ -63,17 +63,15 @@ const createOrder = async (req, res) => {
       (sum, item) => sum + (item.price * item.quantity),
       0
     );
-    const tax = subtotal * 0.075; // 7.5% VAT
-    const total = subtotal + tax; // Add shipping if needed
+   
+    const total = subtotal + 1000 // Add shipping if needed
 
     // 3. Create order
     const order = await Order.create({
       ...orderData,
-
-      userEmail: "don@gmail.com",
+ userEmail: orderData.userEmail,
       paymentReference,
       subtotal,
-      tax,
       total,
       status: 'paid' // Only set after verification
     });

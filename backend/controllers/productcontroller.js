@@ -7,7 +7,7 @@ const getAllProducts = async (req, res) => {
         if(!products || products.length === 0) {
             return res.status(204).json({"message": "No products found"});
         }
-        return res.json(products);
+        return res.json(products || []);
     } catch(err) {
         console.error(err);
         return res.status(500).json({ error: err.message });
@@ -21,7 +21,7 @@ const getAllMen = async (req, res) => {
         if(!menProducts || menProducts.length === 0) {
             return res.status(204).json({"message": "No men's products found"});
         }
-        return res.json(menProducts);
+        return res.json(menProducts || []);
     } catch(err) {
         console.error(err);
         return res.status(500).json({ error: err.message });
@@ -35,7 +35,7 @@ const getAllWomen = async (req, res) => {
         if(!womenProducts || womenProducts.length === 0) {
             return res.status(204).json({"message": "No women's products found"});
         }
-        return res.json(womenProducts);
+        return res.json(womenProducts || []);
     } catch(err) {
         console.error(err);
         return res.status(500).json({ error: err.message });
