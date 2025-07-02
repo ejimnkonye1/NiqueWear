@@ -108,7 +108,7 @@ const OrdersSection = ({orders}) => {
             {/* Enhanced Modal for Order Details */}
          {selectedOrder && (
   <div className="fixed inset-0 flex items-center justify-center z-50  bg-opacity-50 p-4 backdrop-blur-sm">
-    <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+    <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[70vh] overflow-hidden flex flex-col">
       {/* Header */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
         <div className="flex justify-between items-center">
@@ -165,18 +165,18 @@ const OrdersSection = ({orders}) => {
             <h4 className="text-lg font-semibold mb-4 flex items-center">
               <FiUser className="mr-2" /> Customer Information
             </h4>
-            <div className="space-y-3">
-              <div className="flex">
+            <div className="space-y-2">
+              <div className="space-x-2">
                 <span className="text-gray-500 w-28">Name:</span>
-                <span>{selectedOrder.firstName} {selectedOrder.lastName}</span>
+                <span className="text-sm md:text-md">{selectedOrder.firstName} {selectedOrder.lastName}</span>
               </div>
-              <div className="flex">
-                <span className="text-gray-500 w-28">Email:</span>
-                <span>{selectedOrder.email}</span>
+              <div className="space-x-2">
+                <span className="text-gray-500 text-md w-28">Email:</span>
+                <span className="text-sm md:text-md">{selectedOrder.email}</span>
               </div>
-              <div className="flex">
+              <div className="space-x-2">
                 <span className="text-gray-500 w-28">Phone:</span>
-                <span>{selectedOrder.phone}</span>
+                <span className="text-sm md:text-md">{selectedOrder.phone}</span>
               </div>
             </div>
           </div>
@@ -187,17 +187,17 @@ const OrdersSection = ({orders}) => {
               <FiTruck className="mr-2" /> Shipping Address
             </h4>
             <div className="space-y-3">
-              <div className="flex">
+              <div className="space-x-2">
                 <span className="text-gray-500 w-28">Address:</span>
-                <span>{selectedOrder.address}</span>
+                <span  className="text-sm md:text-md">{selectedOrder.address}</span>
               </div>
-              <div className="flex">
+              <div className="space-x-2">
                 <span className="text-gray-500 w-28">City/State:</span>
-                <span>{selectedOrder.city}, {selectedOrder.state}</span>
+                <span  className="text-sm md:text-md">{selectedOrder.city}, {selectedOrder.state}</span>
               </div>
-              <div className="flex">
+              <div className="space-x-2">
                 <span className="text-gray-500 w-28">Country/Zip:</span>
-                <span>{selectedOrder.country}, {selectedOrder.zip}</span>
+                <span  className="text-sm md:text-md">{selectedOrder.country}, {selectedOrder.zip}</span>
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@ const OrdersSection = ({orders}) => {
         </div>
 
         {/* Order Summary */}
-        <div className="mt-8 bg-gray-50 p-5 rounded-lg">
+        {/* <div className="mt-8 bg-gray-50 p-5 rounded-lg">
           <h4 className="text-lg font-semibold mb-4 flex items-center">
             <FiDollarSign className="mr-2" /> Order Summary
           </h4>
@@ -257,7 +257,7 @@ const OrdersSection = ({orders}) => {
               <span className="font-bold text-indigo-600">{formatAsNaira(selectedOrder.total.toFixed(0))}</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Footer */}

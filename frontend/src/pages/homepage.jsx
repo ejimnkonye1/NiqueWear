@@ -6,6 +6,7 @@ import FilterSidebar from '../home/filtersidebar';
 import Quickview from '../home/quickview';
 import Products from '../home/product';
 import Pagination from '../reuseable/pagination';
+import SkeletonLoader from '../reuseable/skeleton';
 
 const HomePage = ({activeCategory, setActiveCategory, searchQuery, setSearchQuery}) => {
   const [products, setProducts] = useState([]);
@@ -14,7 +15,7 @@ const HomePage = ({activeCategory, setActiveCategory, searchQuery, setSearchQuer
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
+  const [isloading, setIsLoading] = useState(true);
  const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(8); // Items per page
 
@@ -27,54 +28,57 @@ const HomePage = ({activeCategory, setActiveCategory, searchQuery, setSearchQuer
 
   // Fetch products based on active category
 useEffect(() => {
-const fetchProducts = async () => {
-  setLoading(true);
-  setError('');
+  const fetchProducts = async () => {
+    setLoading(true);
+    setIsLoading(true); // Set isloading to true when fetching starts
+    setError('');
 
-  try {
-    let endpoint = `${import.meta.env.VITE_SERVER_URL}/products`;
-    
-    if (activeCategory === 'men') {
-      endpoint = `${import.meta.env.VITE_SERVER_URL}/products/men`;
-    } else if (activeCategory === 'women') {
-      endpoint = `${import.meta.env.VITE_SERVER_URL}/products/women`;
+    try {
+      let endpoint = `${import.meta.env.VITE_SERVER_URL}/products`;
+      
+      if (activeCategory === 'men') {
+        endpoint = `${import.meta.env.VITE_SERVER_URL}/products/men`;
+      } else if (activeCategory === 'women') {
+        endpoint = `${import.meta.env.VITE_SERVER_URL}/products/women`;
+      }
+
+      const response = await axios.get(endpoint);
+      
+      // Validate the response data structure
+      if (!response.data || !Array.isArray(response.data)) {
+        throw new Error('Invalid products data format');
+      }
+
+      const formattedProducts = response.data.map(product => ({
+        ...product,
+        price: typeof product.price === 'string' 
+          ? parseFloat(product.price) 
+          : product.price
+      }));
+
+      setProducts(formattedProducts);
+      setFilteredProducts(formattedProducts);
+      
+    } catch (err) {
+      const errorMessage = err.response?.data?.message 
+        || err.message 
+        || 'Failed to fetch products';
+      
+      setError(errorMessage);
+      console.error('Fetch products error:', err);
+      
+      // Reset products to empty array on error
+      setProducts([]);
+      setFilteredProducts([]);
+    } finally {
+      setLoading(false);
+      setIsLoading(false); // Set isloading to false when fetching is complete
     }
-
-    const response = await axios.get(endpoint);
-    
-    // Validate the response data structure
-    if (!response.data || !Array.isArray(response.data)) {
-      throw new Error('Invalid products data format');
-    }
-
-    const formattedProducts = response.data.map(product => ({
-      ...product,
-      price: typeof product.price === 'string' 
-        ? parseFloat(product.price) 
-        : product.price
-    }));
-
-    setProducts(formattedProducts);
-    setFilteredProducts(formattedProducts);
-    
-  } catch (err) {
-    const errorMessage = err.response?.data?.message 
-      || err.message 
-      || 'Failed to fetch products';
-    
-    setError(errorMessage);
-    console.error('Fetch products error:', err);
-    
-    // Reset products to empty array on error
-    setProducts([]);
-    setFilteredProducts([]);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   fetchProducts();
 }, [activeCategory]);
+
    
 
   // Filter products based on search and price
@@ -111,13 +115,13 @@ const fetchProducts = async () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [activeCategory, searchQuery, priceFilter]);
+
+    console.log("loading homepage", loading)
   return (
     <div className="min-h-screen bg-gray-50">
 
       {loading && (
-        <div className="text-center py-8">
-          <p>Loading products...</p>
-        </div>
+     <SkeletonLoader count={4} /> 
       )}
       
       {error && (
@@ -151,6 +155,7 @@ const fetchProducts = async () => {
             resetFilters={resetFilters}
          filteredProducts={currentProducts}
          setQuickViewProduct={setQuickViewProduct}
+         isloading={isloading}
              />
                    <div className="flex justify-center mt-8">
               <Pagination

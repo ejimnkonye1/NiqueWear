@@ -17,21 +17,33 @@ import LoginPage from './auth/login.jsx';
 import RegisterPage from './auth/register.jsx';
 import SecondHeader from './component/secondheader.jsx';
 import BottomNavbar from './util/bottomnav.jsx';
-import Test from './component/test.jsx';
+
 import Search from './component/search.jsx';
+import SmallScreenCategory from './component/category.jsx';
 
 // Loader component
 const Loader = () => (
   <div className="fixed inset-0 flex flex-col items-center justify-center bg-white dark:bg-gray-900 z-50">
-    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-yellow-500"></div>
-    <h2 className="text-xl font-medium text-gray-800 dark:text-white mt-4">
-      Loading Your Shopping Experience
+    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-indigo-600"></div>
+    <h2 className="text-xl font-semibold text-gray-800 dark:text-white mt-4">
+      Loading...
     </h2>
     <p className="text-gray-500 dark:text-gray-400 mt-2">
-      We're preparing something special for you...
+      Please wait while we fetch your products.
     </p>
   </div>
 );
+// const Loader = () => (
+
+//     <div className="containerss">
+//       <div className="dash first"></div>
+//       <div className="dash seconde"></div>
+//       <div className="dash third"></div>
+//       <div className="dash fourth"></div>
+//     </div>
+//   );
+
+
 
 
 
@@ -86,7 +98,7 @@ function App() {
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           />
-                     <Test
+                     <SmallScreenCategory
                   setActiveCategory={setActiveCategory}
                   activeCategory={activeCategory}
              />

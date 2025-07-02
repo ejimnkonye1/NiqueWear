@@ -4,7 +4,7 @@ import Men from '../component/gg.png';
 import Women from '../component/g.jpg';
 import Kids from '../component/g.jpg';
 
-const Test = ({activeCategory,setActiveCategory}) => {
+const SmallScreenCategory = ({activeCategory,setActiveCategory}) => {
 //   const [activeCategory, setActiveCategory] = useState('all');
 
   const categories = [
@@ -48,4 +48,4 @@ const Test = ({activeCategory,setActiveCategory}) => {
   );
 };
 
-export default Test;
+export default SmallScreenCategory;
